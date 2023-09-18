@@ -11,22 +11,26 @@ lines = [
   
 const [N, M] = lines[0].split(' ').map(Number);
 const fareTables = lines.slice(1, N + 1).map(line => line.split(' ').map(Number));
+console.log(fareTables);
 const X = parseInt(lines[N + 1]);
-const routes = lines.slice(N + 2).map(line => line.split(' ').map(Number));
-console.log('routes: ' + routes);
+console.log(lines.slice(N + 2));
+const routes = lines.slice(N + 2).map(line => {
+  const stringArray = line.split(' ');
+  console.log(stringArray);
+  const numberArray = stringArray.map(Number);
+  console.log(numberArray);
+  return numberArray;
+});
+
+console.log(routes);
 
 let currentStation = 1;
 let totalFare = 0;
 
-
+console.log(routes[1]);
 routes.forEach(([lineNumber, targetStation]) => {
-  console.log(`lineNumber: ${lineNumber}`);
-  console.log(`targetStation: ${targetStation}`);
-  
   
   const fareTable = fareTables[lineNumber - 1];
-  console.log('fareTables: ' + fareTables);
-  console.log('fareTable: ' + fareTable);
   totalFare += Math.abs(fareTable[targetStation - 1] - fareTable[currentStation - 1]);
   currentStation = targetStation;
 });
